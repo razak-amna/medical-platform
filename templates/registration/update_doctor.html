@@ -1,0 +1,30 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Doctor Information</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Update Doctor Information</h1>
+        </header>
+
+        <section class="update-doctor-form">
+            <h2>Update details for Dr. {{ doctor.name }} </h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn">Update Doctor</button>
+            </form>
+        </section>
+
+        <section class="back-to-list">
+            <a href="{% url 'doctor_list' %}" class="btn">Back to Doctors List</a>
+        </section>
+    </div>
+</body>
+</html>

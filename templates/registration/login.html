@@ -1,0 +1,73 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+        </div>
+    </div>
+</body>
+</html>
+
+    <!-- <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent default form submission
+
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            const username = document.querySelector('[name=username]').value;
+            const password = document.querySelector('[name=password]').value;
+
+            // const data = new FormData();
+            // data.append('username', username);
+            // data.append('password', password);
+
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                },
+                body: JSON.stringify({ username, password }) //data
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // If the response is not OK, throw an error
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json(); // Parse the response as JSON
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    window.location.href = data.redirect_url;  // Redirect to the appropriate profile page
+                } else {
+                    alert('Login failed: ' + data.message);  // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred.');
+            });
+        });
+    </script>
+</body>
+</html> -->

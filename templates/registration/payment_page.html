@@ -1,0 +1,363 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Payment Page</title>
+    
+    <style>
+      .stripe-element {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-bottom: 15px;
+      }
+  
+      #submit {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+  
+      #submit:hover {
+          background-color: #0056b3;
+      }
+  </style>
+  
+</head>
+<body>
+    <h1>Complete Your Payment</h1>
+    <p>Amount: $<span id="amount">{{ consultation_fees }}</span></p>
+
+    <form id="payment-form" method="post">
+      {% csrf_token %}
+      
+    <label for="card-number">Card Number</label>
+    <div id="card-number" class="stripe-element"></div>
+    
+    
+    <label for="card-expiry">Expiry Date</label>
+    <div id="card-expiry" class="stripe-element"></div>
+    
+    
+    <label for="card-cvc">CVC</label>
+    <div id="card-cvc" class="stripe-element"></div>
+     <div id="card-element"> Stripe will insert the card input here </div>
+    <button id="submit">Pay</button>
+  </form>
+  <div id="payment-result"></div>
+  <script>
+    // Make sure Stripe.js has been loaded
+const stripe = Stripe("{{ stripe_publishable_key }}");  // Replace with your actual publishable key
+const elements = stripe.elements();
+
+const cardNumberElement = elements.create('cardNumber');
+const cardExpiryElement = elements.create('cardExpiry');
+const cardCvcElement = elements.create('cardCvc');
+
+cardNumberElement.mount('#card-number');
+cardExpiryElement.mount('#card-expiry');
+cardCvcElement.mount('#card-cvc');
+
+document.getElementById('payment-form').addEventListener('submit', async (e) => {
+    e.preventDefault();  // Prevent the form from submitting the default way
+
+    try {
+        const clientSecret = '{{ client_secret }}';  // Pass the client secret from Django
+
+        // Create PaymentMethod from the card elements
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: cardNumberElement,
+        });
+
+        if (error) {
+            document.getElementById('payment-result').textContent = error.message;
+            return;
+        }
+
+        // Confirm the PaymentIntent
+        const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: paymentMethod.id,
+        });
+
+        if (confirmError) {
+            document.getElementById('payment-result').textContent = `Payment failed: ${confirmError.message}`;
+        } else if (paymentIntent.status === 'succeeded') {
+            document.getElementById('payment-result').textContent = 'Payment succeeded!';
+            window.location.href = "{% url 'user_profile' %}";
+        }
+    } catch (error) {
+        console.error('Error during payment:', error);
+        document.getElementById('payment-result').textContent = "Something went wrong. Please try again.";
+    }
+});
+
+</script>
+
+
+</body>
+</html> -->
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Payment Page</title>
+    
+</head>
+<body>
+    <h1>Complete Your Payment</h1>
+    <p>Stripe Publishable Key: {{ stripe_publishable_key }}</p>
+<p>Client Secret: {{ client_secret }}</p>
+    <p>Amount: $<span id="amount">{{ consultation_fees }}</span></p>
+
+    <form id="payment-form" method="post">
+        {% csrf_token %}
+        
+        <label for="card-number">Card Number</label>
+        <div id="card-number" class="stripe-element"></div>
+
+        
+        <label for="card-expiry">Expiry Date</label>
+        <div id="card-expiry" class="stripe-element"></div>
+
+        
+        <label for="card-cvc">CVC</label>
+        <div id="card-cvc" class="stripe-element"></div>
+
+        <button id="submit">Pay</button>
+    </form>
+    <div id="payment-result"></div> -->
+
+    <!-- <script>
+        const stripePublishableKey = "{{ stripe_publishable_key }}";
+    const clientSecret = "{{ client_secret }}";
+
+    if (!stripePublishableKey || !clientSecret) {
+        document.getElementById('payment-result').textContent =
+            "Payment cannot proceed. Missing necessary information.";
+    }
+        // Initialize Stripe
+        const stripe = Stripe("{{ stripe_publishable_key }}");
+        const elements = stripe.elements();
+
+        const cardNumberElement = elements.create('cardNumber');
+        const cardExpiryElement = elements.create('cardExpiry');
+        const cardCvcElement = elements.create('cardCvc');
+
+        cardNumberElement.mount('#card-number');
+        cardExpiryElement.mount('#card-expiry');
+        cardCvcElement.mount('#card-cvc');
+
+        document.getElementById('payment-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            try {
+                const clientSecret = '{{ client_secret }}';
+
+                if (!clientSecret || !stripe) {
+                    document.getElementById('payment-result').textContent = "Payment cannot proceed. Missing necessary information.";
+                    return;
+                }
+
+                const { error, paymentMethod } = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: cardNumberElement,
+                });
+
+                if (error) {
+                    document.getElementById('payment-result').textContent = error.message;
+                    return;
+                }
+
+                const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: paymentMethod.id,
+                });
+
+                if (confirmError) {
+                    document.getElementById('payment-result').textContent = `Payment failed: ${confirmError.message}`;
+                } else if (paymentIntent.status === 'succeeded') {
+                    document.getElementById('payment-result').textContent = 'Payment succeeded!';
+                    window.location.href = "{% url 'user_profile' %}";
+                }
+            } catch (error) {
+                console.error('Error during payment:', error);
+                document.getElementById('payment-result').textContent = "Something went wrong. Please try again.";
+            }
+        });
+    </script> -->
+    <!-- <script>
+        const stripePublishableKey = "{{ stripe_publishable_key }}";
+        const clientSecret = "{{ client_secret }}";
+    
+        if (!stripePublishableKey || !clientSecret) {
+    document.getElementById('payment-result').textContent =
+        "Payment cannot proceed. Missing necessary information.";
+    console.error("Missing Stripe publishable key or client secret.");
+    return;
+}
+    
+        const stripe = Stripe(stripePublishableKey);
+        const elements = stripe.elements();
+    
+        const cardNumberElement = elements.create('cardNumber');
+        const cardExpiryElement = elements.create('cardExpiry');
+        const cardCvcElement = elements.create('cardCvc');
+    
+        cardNumberElement.mount('#card-number');
+        cardExpiryElement.mount('#card-expiry');
+        cardCvcElement.mount('#card-cvc');
+    
+        document.getElementById('payment-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            try {
+                const { error, paymentMethod } = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: cardNumberElement,
+                });
+    
+                if (error) {
+                    document.getElementById('payment-result').textContent = error.message;
+                    return;
+                }
+    
+                const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: paymentMethod.id,
+                });
+    
+                if (confirmError) {
+                    document.getElementById('payment-result').textContent = `Payment failed: ${confirmError.message}`;
+                } else if (paymentIntent.status === 'succeeded') {
+                    document.getElementById('payment-result').textContent = 'Payment succeeded!';
+                    window.location.href = "{% url 'user_profile' %}";
+                }
+            } catch (error) {
+                document.getElementById('payment-result').textContent = "Something went wrong. Please try again.";
+            }
+        });
+    </script>
+</body>
+</html> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Payment Page</title>
+    <style>
+        .stripe-element {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        #submit {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #submit:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Complete Your Payment</h1>
+    <p>Amount: $<span id="amount">10.0</span></p>
+
+    <form id="payment-form">
+        {% csrf_token %}
+        <label for="card-number">Card Number</label>
+        <div id="card-number" class="stripe-element"></div>
+
+        <label for="card-expiry">Expiry Date</label>
+        <div id="card-expiry" class="stripe-element"></div>
+
+        <label for="card-cvc">CVC</label>
+        <div id="card-cvc" class="stripe-element"></div>
+
+        <button id="submit">Pay</button>
+    </form>
+    <div id="payment-result"></div>
+
+    <script>
+        const stripe = Stripe("{{ stripe_publishable_key }}");
+        const elements = stripe.elements();
+
+        const cardNumberElement = elements.create('cardNumber');
+        const cardExpiryElement = elements.create('cardExpiry');
+        const cardCvcElement = elements.create('cardCvc');
+
+        cardNumberElement.mount('#card-number');
+        cardExpiryElement.mount('#card-expiry');
+        cardCvcElement.mount('#card-cvc');
+
+        document.getElementById('payment-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent form submission
+
+            try {
+                // Fetch client secret from the backend
+                const response = await fetch("", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}",
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to retrieve client secret.");
+                }
+
+                const { client_secret: clientSecret, amount } = await response.json();
+
+                // Confirm the PaymentIntent
+                const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardNumberElement,
+                    },
+                });
+
+                if (error) {
+                    document.getElementById("payment-result").textContent = `Payment failed: ${error.message}`;
+                } else if (paymentIntent.status === "succeeded") {
+            // Notify the backend about successful payment
+            document.getElementById('payment-result').textContent = 'Payment succeeded!';
+            
+            // Send payment ID to confirm it in the backend
+            await fetch("{% url 'confirm_payment' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",  // Include CSRF token for security
+                },
+                body: JSON.stringify({
+                    payment_id: paymentIntent.id,  // Send the PaymentIntent ID
+                }),
+            });
+
+            // Redirect to the user profile after payment success
+            window.location.href = "{% url 'user_profile' %}";
+        }
+            } catch (err) {
+                console.error(err);
+                document.getElementById("payment-result").textContent = "An error occurred. Please try again.";
+            }
+        });
+    </script>
+</body>
+</html>

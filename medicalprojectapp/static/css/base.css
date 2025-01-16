@@ -1,0 +1,253 @@
+/* General styles */
+body {
+    font-family: 'Times New Roman', serif; /* Change font to Times New Roman */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Navbar styles */
+nav {
+    background-color: transparent; /* Make navbar transparent */
+    padding: 10px 20px;
+    color: rgb(114, 65, 6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(114, 65, 6);
+    margin-bottom: 5px;
+}
+
+nav a {
+    color: rgb(114, 65, 6);
+    text-decoration:none;
+    margin: 0 15px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+
+nav a:hover {
+    text-decoration:brown;
+}
+
+/* Body Section */
+.hero {
+    background-image: url("{% static 'images/bg-ayur.jpg'%}");
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(114, 65, 6);
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Moving Pictures Section */
+.image-slider {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px 0;
+    background-color: #ecf0f1;
+}
+
+.image-slider img {
+    width: 300px;
+    margin: 0 15px;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.image-slider img:hover {
+    transform: scale(1.1);
+}
+
+/* Text Moving Section */
+.text-slider {
+    display: flex;
+    overflow: hidden;
+    background-color: rgb(135, 89, 34);
+    padding: 20px;
+    color: white;
+    font-size: 24px;
+}
+
+.text-slider div {
+    padding-right: 50px;
+    white-space: nowrap;
+    animation: slide 25s linear infinite;
+}
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* General About Section Styling */
+.about-section {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: rgb(114, 65, 6);
+}
+
+/* Text Content Styling */
+.about-text p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgb(114, 65, 6);
+    margin-bottom: 30px;
+}
+
+/* Images Section Styling */
+.about-images {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.image-card {
+    flex: 1;
+    max-width: 300px;
+    text-align: center;
+}
+
+
+/* Image Title Styling */
+.image-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: rgb(114, 65, 6);
+}
+
+/* Image Grid Styling */
+.image-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+    gap: 10px;
+    justify-items: center;
+}
+
+/* Image Styling */
+.image-card img {
+    width: 100%;
+    /* width: 250px; Consistent image size */
+    height: 90px; /* Fixed height for uniformity */
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect */
+}
+
+/* Hover Effect for Images */
+.image-card img:hover {
+    transform: scale(1.1); /* Slight zoom */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+
+
+/* Why Choose Us */
+.why-choose-us {
+    margin-top: 40px;
+}
+.why-choose-us h3{
+    text-align: center;
+    color: rgb(114, 65, 6);
+    font-size:x-large;
+    font-weight: bolder;
+}
+.why-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.why-item {
+    flex: 1;
+    max-width: 300px;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.why-item i {
+    font-size: 2.5rem;
+    color: #27ae60;
+    margin-bottom: 10px;
+}
+
+.why-item h4 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: rgb(114, 65, 6);
+}
+
+.why-item p {
+    color: rgb(114, 65, 6);
+    font-size: 1rem;
+}
+
+/* Features List */
+.our-features {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.our-features h3{
+    text-align: center;
+    color: rgb(114, 65, 6);
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.our-features ul {
+    list-style-type: disc;
+    text-align: left;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0 20px;
+    color: rgb(114, 65, 6);
+    font-size: 1rem;
+}
+
+.our-features li {
+    margin-bottom: 10px;
+}
+
+
+/* Footer Section */
+footer {
+    background-color: transparent; /* Make footer transparent */
+    color: rgb(75, 73, 73);
+    text-align: center;
+    padding: 20px;
+}
+
+footer a {
+    color: rgb(75, 73, 73);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,44 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Profile</title>
+    <link rel="stylesheet" href="{% static 'css/recep.css' %}">  <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Receptionist Profile</h1>
+        </header>
+
+        <section class="doctor-list">
+            <h2>Doctors List:</h2>
+            <ul>
+                {% for doctor in doctors %}
+                    <li>{{ doctor.name }} - {{ doctor.specialization }}</li>
+                    <a href="{% url 'update_doctor' doctor.id %}" class="btn">Update Doctor</a>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="add-doctor-form">
+            <h2>Add New Doctor:</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ doctor_form.as_p }}
+                <button type="submit" class="btn">Add Doctor</button>
+            </form>
+        </section>
+
+        <section class="profile-actions">
+            <h2>Receptionist Profile</h2>
+            <p>Manage doctors, view schedules, and send notifications.</p>
+            <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+        </section>
+    </div>
+</body>
+</html>
+
+

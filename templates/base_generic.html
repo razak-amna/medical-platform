@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurvedic Medical Assistance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">
+        <img src="{% static 'images/ayur.jpg' %}" alt="Logo" style="height: 50px; width:50px;" class="d-inline-block align-text-middle">
+        Ayurvedic Assistance
+    </div>
+    <div class="nav-links">
+        <a href="#about" id="about-link">About</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">SignUp</a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>Welcome to Ayurvedic Medical Assistance</h1>
+</div>
+
+<!-- Image Slider -->
+<div class="image-slider">
+    <img src="{% static 'images/bg-ayur.jpg' %}" alt="Ayurvedic Treatment">
+    <img src="{% static 'images/bg1-ayur.jpg' %}" alt="Ayurvedic Treatment">
+    <img src="{% static 'images/bg2-ayur.jpg' %}" alt="Ayurvedic Treatment">
+    <img src="{% static 'images/med-ayur.jpg' %}" alt="Ayurvedic Treatment">
+    <img src="{% static 'images/med1-ayur.jpg' %}" alt="Ayurvedic Treatment">
+</div>
+
+<!-- Text Slider -->
+<div class="text-slider">
+    <div>
+        Ayurvedic medicine is a system of natural healing that originated in India over 5,000 years ago.
+        It focuses on balancing the body's energies and promoting holistic health through herbal treatments, diet, and lifestyle.
+    </div>
+    <div>
+        Explore our range of treatments for various ailments using natural methods.
+    </div>
+</div>
+
+
+<div id="about" class="about-section">
+    <h2 class="section-title">About Us</h2>
+    <div class="about-container">
+        <!-- Text Content -->
+        <div class="about-text">
+            <p>
+                We are dedicated to providing the best Ayurvedic treatments to help people achieve holistic health. 
+                Our team of experienced practitioners offers a wide range of services, including herbal therapies, 
+                lifestyle consultations, and dietary advice. We believe in natural healing methods and aim to 
+                improve the quality of life of our patients.
+            </p>
+        </div>
+        <!-- Images -->
+        <div class="about-images">
+            <div class="image-card">
+                <img src="{% static 'images/ayur-treat.jpg' %}" alt="Treatment">
+                <img src="{% static 'images/ayur-treat1.jpg' %}" alt="Treatment">
+                <img src="{% static 'images/ayur-treat2.jpg' %}" alt="Treatment">
+            </div>
+            <div class="image-card">
+                <img src="{% static 'images/med.jpg' %}" alt="Medicine">
+                <img src="{% static 'images/med2.jpg' %}" alt="Medicine">
+                <img src="{% static 'images/med3.jpg' %}" alt="Medicine">
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="why-choose-us">
+        <h3>Why Choose Us?</h3>
+        <div class="why-container">
+            <div class="why-item">
+                <i class="fas fa-user-md"></i>
+                <h4>Expert Practitioners</h4>
+                <p>Our doctors have decades of experience in Ayurvedic medicine.</p>
+            </div>
+            <div class="why-item">
+                <i class="fas fa-leaf"></i>
+                <h4>Natural Healing</h4>
+                <p>We use only natural and organic herbs for treatments.</p>
+            </div>
+            <div class="why-item">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h4>Holistic Approach</h4>
+                <p>We focus on balancing mind, body, and spirit for optimal health.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Features -->
+    <div class="our-features">
+        <h3>Our Features</h3>
+        <ul>
+            <li>Comprehensive health consultations and lifestyle guidance.</li>
+            <li>Authentic Ayurvedic medicine prepared with care.</li>
+            <li>Easy appointment booking and follow-up services.</li>
+            <li>Trusted by thousands of satisfied patients globally.</li>
+            <li>Focus on preventive healthcare and natural remedies.</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- Footer Section -->
+<footer>
+    <p>Follow us on:</p>
+    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+    <p>&copy; 2025 Ayurvedic Assistance. All rights reserved.</p>
+</footer>
+
+<!-- JavaScript & jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/base.js' %}"></script>
+</body>
+</html>
+

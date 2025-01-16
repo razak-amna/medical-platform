@@ -1,0 +1,168 @@
+/* Profile Page Styles */
+
+/* General Page Styling */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    height: 100vh;  /* Ensure the page takes up the full height of the viewport */
+    overflow-y: auto;  /* Enables vertical scrolling if the content exceeds the viewport height */
+    scroll-behavior: smooth; /* Smooth scroll */
+}
+
+/* Navbar Styling */
+nav {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    color: rgb(114, 65, 6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav .nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+nav .nav-links a {
+    color: rgb(114, 65, 6);
+    text-decoration: none;
+    font-size:larger;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav .nav-links a:hover {
+    color: rgb(75, 42, 2);
+}
+
+/* Profile Container */
+h2 {
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+    color: rgb(114, 65, 6);
+}
+.profile-container h2{
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+}
+.profile-container {
+    width: 80%;
+    margin: 30px auto;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Shadow effect */
+    border-radius: 8px;
+    background: #fff;
+    overflow: auto;  /* Ensure content inside the container is scrollable if needed */
+}
+
+/* Profile Content Styling */
+.profile-container p {
+    font-size: 20px;
+    color: rgb(114, 65, 6);
+    line-height: 1.6;
+}
+
+/* Appointment List Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #e0f7fa;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Button Styling */
+button {
+    background-color: rgb(114, 65, 6);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgb(75, 43, 3);
+}
+/* Style links to look like buttons */
+.action-btn {
+    display: inline-block;
+    background-color: rgb(114, 65, 6);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;  /* Remove underline */
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: rgb(75, 43, 3); /* Darken the button on hover */
+}
+
+#showDoctorsBtn {
+    margin-top: 20px;
+}
+
+#bookAppointmentBtn {
+    margin-top: 30px;
+}
+
+/* Messages Section */
+.messages {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #d0f8d0;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+}
+
+.messages p {
+    color: #388e3c;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(114, 65, 6);
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    nav .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-container {
+        width: 95%;
+        padding: 20px;
+    }
+}
+

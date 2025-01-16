@@ -1,0 +1,46 @@
+<!-- {% extends 'base_generic.html' %} -->
+
+{% block content %}
+  <h2>Select Appointment</h2>
+  <form id="payment-form" method="POST">
+    {% csrf_token %}
+    <label for="appointment">Choose an unconfirmed appointment:</label>
+    <select name="appointment" id="appointment">
+      {% for appointment in appointments %}
+        <option value="{{ appointment.id }}">
+          Appointment for {{ appointment.date }} - {{ appointment.time }}
+        </option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Proceed to Payment</button>
+  </form>
+
+  <script>
+    // Stripe elements setup
+    const stripe = Stripe("{{ stripe_publishable_key }}");
+    const elements = stripe.elements();
+    const cardElement = elements.create("card");
+    cardElement.mount("#card-element");
+
+    // Handle form submission
+    document.getElementById("payment-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const appointmentId = document.getElementById("appointment").value;
+
+      const { error, paymentIntent } = await stripe.confirmCardPayment("{{ client_secret }}", {
+        payment_method: {
+          card: cardElement,
+        },
+      });
+
+      if (error) {
+        alert("Payment failed: " + error.message);
+      } else if (paymentIntent.status === "succeeded") {
+        alert("Payment succeeded!");
+        window.location.href = "{% url 'user_profile' %}";
+      }
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Appointment</title>
+    <link rel="stylesheet" href="{% static 'css/book.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Book an Appointment</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Book Appointment</button>
+        </form>
+
+        <h3>Doctors Available:</h3>
+        <ul>
+            {% for doctor in doctors %}
+                <li>{{ doctor.name }} (Specialization: {{ doctor.specialization }})</li>
+            {% empty %}
+                <p>No doctors available.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

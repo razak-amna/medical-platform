@@ -1,0 +1,88 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with the Bot</title>
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+</head>
+<body>
+  <div class="chat-container">
+      <h2>Chat with the Bot</h2>
+
+      
+      <div class="chat-box" id="chat-container">
+        {% for message in chat_history %}
+            <div class="chat-message 
+            {% if message.user_message %}
+              user-message
+            {% else %}  
+              bot-response
+            {% endif %}">
+                <strong>{% if message.user_message %}You:{% else %}Bot:{% endif %}</strong> 
+                {{ message.user_message|default:message.bot_response }}
+            </div>
+        {% endfor %}
+    </div>
+
+       
+      <form id="chat-form" method="post">
+          {% csrf_token %}
+          <div class="input-container">
+              <input type="text" id="user-message" name="user_message" placeholder="Ask something..." required>
+              <button type="submit">Send</button>
+          </div>
+      </form>
+
+      <div class="back-link">
+          <a href="{% url 'user_profile' %}">Back to Profile</a>
+      </div>
+  </div>
+
+  <script src="{% static 'js/chat.js' %}"></script>
+</body>
+</html> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with the Bot</title>
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+</head>
+<body>
+  <div class="chat-container">
+      <h2>Chat with the Bot</h2>
+
+      <!-- Chat box that contains the conversation -->
+      <div class="chat-box" id="chat-container">
+        {% for message in chat_history %}
+            <div class="chat-message 
+            {% if message.user_message %} user-message {% else %} bot-response {% endif %}">
+                <div class="message-box">
+                    <strong>{% if message.user_message %}You:{% else %}Bot:{% endif %}</strong> 
+                    <p>{{ message.user_message|default:message.bot_response }}</p>
+                </div>
+            </div>
+        {% endfor %}
+      </div>
+
+      <!-- Form for new messages -->
+      <form id="chat-form" method="post">
+          {% csrf_token %}
+          <div class="input-container">
+              <input type="text" id="user-message" name="user_message" placeholder="Ask something..." required>
+              <button type="submit">Send</button>
+          </div>
+      </form>
+
+      <div class="back-link">
+          <a href="{% url 'user_profile' %}">Back to Profile</a>
+      </div>
+  </div>
+
+  <script src="{% static 'js/chat.js' %}"></script>
+</body>
+</html>

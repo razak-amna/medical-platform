@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">  <!-- Link your custom CSS -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <img src="{% static 'images/ayur.jpg' %}" alt="Logo" style="height: 50px; width:50px;" class="d-inline-block align-text-middle">
+            Ayurvedic Assistance
+        </div>
+        <div class="nav-links">
+            <a href="#about" id="about-link">About</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">SignUp</a>
+        </div>
+    </nav>
+
+    <!-- User Profile Content -->
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <p><strong>Username:</strong> {{ profile.user }}</p>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <p class="alert alert-success">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <p><strong>Date of Birth:</strong> {{ profile.dob }}</p>
+        <p><strong>Medical History:</strong> {{ profile.medical_history }}</p>
+
+        <h3>Your Appointments:</h3>
+        <ul>
+            {% for appointment in appointments %}
+            <div>
+                <p>Doctor: {{ appointment.doctor.name }}</p>
+                <p>Date: {{ appointment.appointment_date }}</p>
+                <!-- <p>Time: {{ appointment.time }}</p> -->
+                <p>Status: {% if appointment.confirmed %}Confirmed{% else %}Pending{% endif %}</p>
+                <p>Payment Status: {% if payment.status %}UnPaid{% else %}Success{% endif %}</p>  <!--.appointment.paid-->
+            </div>
+            {% empty %}
+            <p>You have no appointments scheduled.</p>
+            {% endfor %}
+        </ul>
+
+        <h3>Available Doctors:</h3>
+        <button id="showDoctorsBtn">Show Available Doctors</button>
+        <div id="doctorsList" style="display: none;">
+            <ul>
+                {% for doctor in doctors %}
+                <li>{{ doctor.name }} (Specialization: {{ doctor.specialization }})</li>
+                {% empty %}
+                <p>No doctors available.</p>
+                {% endfor %}
+            </ul>
+        </div>
+        <br>
+        <button id="bookAppointmentBtn">Book Appointment</button>
+        <br><br>
+
+        <a href="{% url 'edit_profile' %}">
+          <button class="action-btn">Edit Profile</button>
+        </a>
+        <br><br>
+        <a href="{% url 'chatbot' %}">
+            <button class="action-btn">Chat with the Bot</button>
+        </a>
+        <br><br>
+        <a href="{% url 'logout' %}">
+            <button class="action-btn">Logout</button>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Ayurvedic Assistance. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Toggle doctors list visibility
+        document.getElementById('showDoctorsBtn').addEventListener('click', function() {
+            const doctorsList = document.getElementById('doctorsList');
+            doctorsList.style.display = doctorsList.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Redirect to the appointment booking page
+        document.getElementById('bookAppointmentBtn').addEventListener('click', function() {
+            window.location.href = '{% url "book_appointment" %}';  // Redirect to appointment booking page
+        });
+    </script>
+</body>
+</html>
