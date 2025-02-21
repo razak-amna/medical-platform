@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t$%1*1y7gr)pbru%v@&zdjljs!8^!)v308p^h04z6-%1(q**w2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['13.60.6.239','www.medicalplatform.com']
 
 
 # Application definition
@@ -88,11 +88,19 @@ WSGI_APPLICATION = 'medicalproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+<<<<<<< HEAD
         'NAME': os.getenv('DB_NAME', 'medical_platform'),
         'USER': os.getenv('DB_USER', 'medical_user'),
         'PASSWORD': os.getenv('DB_PASSWORD', ''),
         'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', '3306'),
+=======
+        'NAME': 'medicalayur',
+        'USER': 'root',
+        'PASSWORD': 'strongpass',
+        'HOST': 'localhost',  
+        'PORT': '3306',
+>>>>>>> 32dd44f0c535313f974f1e1d61316bdfb1b8c447
     }
 }
 
@@ -133,6 +141,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
+=======
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+>>>>>>> 32dd44f0c535313f974f1e1d61316bdfb1b8c447
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'user_profile'
 # Default primary key field type
