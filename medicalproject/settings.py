@@ -75,34 +75,34 @@ WSGI_APPLICATION = 'medicalproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'medicalayur',
-#         'USER': 'root',
-#         'PASSWORD': 'ar@1305',
-#         'HOST': 'localhost',  
-#         'PORT': '3306',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-
-        'NAME': os.getenv('DB_NAME', 'medical_platform'),
-        'USER': os.getenv('DB_USER', 'medical_user'),
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '3306'),
-
         'NAME': 'medicalayur',
         'USER': 'root',
-        'PASSWORD': 'strongpass',
+        'PASSWORD': 'ar@1305',
         'HOST': 'localhost',  
         'PORT': '3306',
-
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+
+#         'NAME': os.getenv('DB_NAME', 'medical_platform'),
+#         'USER': os.getenv('DB_USER', 'medical_user'),
+#         'PASSWORD': os.getenv('DB_PASSWORD', ''),
+#         'HOST': os.getenv('DB_HOST', 'localhost'),
+#         'PORT': os.getenv('DB_PORT', '3306'),
+
+#         'NAME': 'medicalayur',
+#         'USER': 'root',
+#         'PASSWORD': 'strongpass',
+#         'HOST': '127.0.0.1',  
+#         'PORT': '3306',
+
+#     }
+# }
 
 AUTH_USER_MODEL = 'medicalprojectapp.User'
 
