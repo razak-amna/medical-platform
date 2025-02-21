@@ -609,6 +609,7 @@ def update_doctor(request, doctor_id):
 
 PREDEFINED_RESPONSES = {
     "hello": "Namaste! How can I assist you with Ayurvedic guidance today?",
+    "hai": "Namaste! How can I assist you with Ayurvedic guidance today?",
     "appointment": "You can schedule an appointment with our Ayurvedic specialist through the appointment page.",
     "help": "I am here to provide Ayurvedic guidance. Please share your query.",
     "doctor": "Our experienced Ayurvedic doctors are available for consultations. Visit the Doctors page to learn more.",
@@ -625,7 +626,8 @@ PREDEFINED_RESPONSES = {
     "detox": "To detoxify, you can start your day with warm water and lemon, and include Triphala powder in your routine.",
     "immunity": "Boost your immunity by consuming chyawanprash daily and adding turmeric and black pepper to your meals.",
     "fever": "For mild fever, drink coriander seed tea or tulsi tea. If the fever persists, consult a doctor immediately.",
-    "jointpain": "For joint pain, try applying warm mustard oil mixed with a pinch of turmeric or consuming fenugreek seeds daily."
+    "jointpain": "For joint pain, try applying warm mustard oil mixed with a pinch of turmeric or consuming fenugreek seeds daily.",
+    "backpain": "For back pain, try some oil massage for pain relief and put something warm on your back."
 }
 
 def get_bot_response(user_message):

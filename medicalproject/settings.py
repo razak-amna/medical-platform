@@ -75,14 +75,24 @@ WSGI_APPLICATION = 'medicalproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'medicalayur',
+#         'USER': 'root',
+#         'PASSWORD': 'ar@1305',
+#         'HOST': 'localhost',  
+#         'PORT': '3306',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'medicalayur',
-        'USER': 'root',
-        'PASSWORD': 'ar@1305',
-        'HOST': 'localhost',  
-        'PORT': '3306',
+        'NAME': os.getenv('DB_NAME', 'medical_platform'),
+        'USER': os.getenv('DB_USER', 'medical_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
@@ -122,7 +132,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'user_profile'
 # Default primary key field type

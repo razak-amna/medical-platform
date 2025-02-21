@@ -167,17 +167,57 @@ h2 {
     word-wrap: break-word;
 }
 
-.chat-message.user-message .message-box {
+/* .chat-message.user-message .message-box {
     background-color: #d1ecf1;
     color: #0c5460;
     margin-left: auto;
-    text-align: right;
+    text-align: center;
 }
 
 .chat-message.bot-response .message-box {
     background-color: #f1f1f1;
     color: #333;
     text-align: left;
+} */
+.chat-message {
+    display: flex; /* Use flexbox to control alignment */
+    margin-bottom: 10px; /* Add spacing between messages */
+}
+
+/* User Message Styles */
+.chat-message.user-message {
+    justify-content: flex-end; /* Align user messages to the right */
+    text-align: right;
+}
+
+.chat-message.user-message .message-box {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    text-align: center;
+    align-self: flex-end;
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Add padding inside the message box */
+    margin-left: 50%; /* Push the message box to the right */
+    word-wrap: break-word; /* Handle long words */
+    max-width: 80%; /* Prevent the message box from being too wide */
+}
+
+/* Bot Response Styles */
+.chat-message.bot-response {
+    justify-content: flex-start; /* Align bot messages to the left */
+    text-align: left;
+}
+
+.chat-message.bot-response .message-box {
+    background-color: #f1f1f1;
+    color: #333;
+    text-align: left;
+    align-self: flex-start;
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Add padding inside the message box */
+    margin-right: 50%; /* Push the message box to the left */
+    word-wrap: break-word; /* Handle long words */
+    max-width: 80%; /* Prevent the message box from being too wide */
 }
 
 /* Input Form */
