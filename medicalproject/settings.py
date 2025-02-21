@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t$%1*1y7gr)pbru%v@&zdjljs!8^!)v308p^h04z6-%1(q**w2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['13.60.6.239','www.medicalplatform.com']
 
 
 # Application definition
